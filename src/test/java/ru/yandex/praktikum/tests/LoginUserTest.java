@@ -19,6 +19,7 @@ public class LoginUserTest extends BaseTest {
 
     @Before
     public void setUpUser() {
+        userSteps = new UserSteps();
         user = UserGenerator.randomUser();
         userSteps.createUser(user);
     }
