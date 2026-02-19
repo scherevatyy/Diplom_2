@@ -1,6 +1,6 @@
 package ru.yandex.praktikum.client;
 
-import io.restassured.RestAssured;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import ru.yandex.praktikum.model.User;
 
@@ -14,6 +14,7 @@ public class UserClient {
 
     public Response createUser(User user) {
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .body(user)
@@ -22,6 +23,7 @@ public class UserClient {
 
     public Response login(User user) {
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .body(user)
@@ -30,6 +32,7 @@ public class UserClient {
 
     public Response updateUser(String accessToken, User user) {
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Authorization", accessToken)
@@ -39,14 +42,16 @@ public class UserClient {
 
     public Response updateUserWithoutAuth(User user) {
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .body(user)
                 .patch(USER_PATH);
     }
 
-    public Response deleteUser(String accessToken) {
-        return given()
+    public void deleteUser(String accessToken) {
+        given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Authorization", accessToken)
@@ -55,6 +60,7 @@ public class UserClient {
 
     public Response getUser(String accessToken) {
         return given()
+                .filter(new AllureRestAssured())
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Authorization", accessToken)

@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.tests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
@@ -38,7 +39,8 @@ public class UpdateUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изменение email пользователя с авторизацией")
+    @DisplayName("Успешное изменение email пользователя с авторизацией")
+    @Description("Проверка изменения email пользователя")
     public void updateUserEmailWithAuthSuccess() {
 
         User updatedUser = new User(
@@ -55,6 +57,7 @@ public class UpdateUserTest extends BaseTest {
 
     @Test
     @DisplayName("Изменение имени пользователя с авторизацией")
+    @Description("Проверка изменения имени пользователя")
     public void updateUserNameWithAuthSuccess() {
 
         User updatedUser = new User(
@@ -70,7 +73,8 @@ public class UpdateUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Изменение данных пользователя без авторизации возвращает ошибку")
+    @DisplayName("Проверка изменения данных пользователя без авторизации")
+    @Description("Изменение данных пользователя без авторизации возвращает ошибку")
     public void updateUserWithoutAuthUnauthorized() {
 
         User updatedUser = new User(

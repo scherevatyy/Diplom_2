@@ -1,5 +1,7 @@
 package ru.yandex.praktikum.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
@@ -32,6 +34,8 @@ public class LoginUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Успешная авторизация существующего пользователя")
+    @Description("Авторизация существующего пользователя")
     public void loginWithExistingUserSuccess() {
         Response response = userSteps.login(user);
         response.then()
@@ -41,6 +45,8 @@ public class LoginUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Безуспешная авторизация существующего пользователя")
+    @Description("Авторизация с некорректным паролем пользователя, проверка сообщения ошибки")
     public void loginWithWrongPasswordReturnsError() {
         User wrongUser = new User(
                 user.getEmail(),

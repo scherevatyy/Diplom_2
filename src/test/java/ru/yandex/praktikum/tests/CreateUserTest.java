@@ -1,5 +1,7 @@
 package ru.yandex.praktikum.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Test;
@@ -23,6 +25,8 @@ public class CreateUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Успешное создание уникального пользователя")
+    @Description("Создание пользователя с уникальными данными")
     public void createUniqueUserSuccess() {
         User user = UserGenerator.randomUser();
         Response response = userSteps.createUser(user);
@@ -34,9 +38,12 @@ public class CreateUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Безуспешное создание пользователя")
+    @Description("Создание дубликата пользователя, получение 403 HTTP кода")
     public void createDuplicateUserReturnsError() {
         User user = UserGenerator.randomUser();
-        userSteps.createUser(user);
+        Response firstUser = userSteps.createUser(user);
+        accessToken = firstUser.path("accessToken");
         Response response = userSteps.createUser(user);
         response.then()
                 .statusCode(403)
@@ -44,6 +51,8 @@ public class CreateUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Безуспешное создание пользователя")
+    @Description("Создание пользователя без обязательных параметров, получение 400 HTTP кода")
     public void createUserWithoutRequiredFieldReturnsError() {
         User user = new User(
                 null,

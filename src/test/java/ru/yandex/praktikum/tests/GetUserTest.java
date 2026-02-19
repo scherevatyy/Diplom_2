@@ -1,5 +1,7 @@
 package ru.yandex.praktikum.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
@@ -32,6 +34,8 @@ public class GetUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Успешное получение данных пользователя")
+    @Description("Получение данных пользователя с авторизацией")
     public void getUserWithAuthSuccess() {
         userSteps.getUser(accessToken)
                 .then()
@@ -42,6 +46,8 @@ public class GetUserTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Безуспешное получение данных пользователя")
+    @Description("Получение данных пользователя без авторизации")
     public void getUserWithoutAuthReturnsError() {
         userSteps.getUser("")
                 .then()
